@@ -2,57 +2,729 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Electric Genome — Hypothesis on nuclear architecture and gene expression by Ifat Keydar">
-
-  <title>The Electric Genome</title>
+  <title>Ifat Keydar - The Electric Genome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Independent scientist exploring electrostatic mechanisms of nuclear organization and gene expression bias.">
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; line-height: 1.6; }
-    h1 { color: #003366; }
-    h2 { color: #555; }
-    img { max-width: 100%; }
+    :root {
+      --bg-light: #f7f7fb;
+      --bg-white: #ffffff;
+      --text-main: #222222;
+      --text-muted: #666666;
+      --accent: #3b6ea8;
+      --accent-soft: #e1ecfa;
+      --border-soft: #ddddee;
+      --max-width: 960px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-light);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout helpers */
+
+    .wrapper {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 3rem 0 2.5rem;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 0.75rem;
+      font-weight: 600;
+      color: #111111;
+    }
+
+    p {
+      margin: 0 0 0.9rem;
+    }
+
+    /* Header / nav */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(247, 247, 251, 0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1.5rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: 0.95rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      padding: 0.2rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      border-bottom-color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Hero */
+
+    .hero {
+      padding-top: 3.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-text {
+      font-size: 1rem;
+      color: var(--text-main);
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background-color: #2e5885;
+      border-color: #2e5885;
+      text-decoration: none;
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--accent);
+      border-color: var(--accent-soft);
+    }
+
+    .btn-ghost:hover {
+      background-color: var(--accent-soft);
+      text-decoration: none;
+    }
+
+    .hero-visual {
+      background-color: var(--bg-white);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hero-visual h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-visual ul {
+      padding-left: 1.1rem;
+      margin: 0.4rem 0;
+    }
+
+    .hero-visual li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* The Electric Genome section */
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .card {
+      background-color: var(--bg-white);
+      border-radius: 1rem;
+      padding: 1.3rem 1.4rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background-color: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(59, 110, 168, 0.2);
+    }
+
+    /* Publications */
+
+    .pub-item {
+      margin-bottom: 1.1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e2e2f0;
+    }
+
+    .pub-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .pub-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .pub-links {
+      font-size: 0.85rem;
+    }
+
+    /* Talks */
+
+    .talks-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    .talk-item {
+      margin-bottom: 0.9rem;
+    }
+
+    .talk-title {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .talk-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0.2rem;
+      top: 0.2rem;
+      bottom: 0.2rem;
+      width: 2px;
+      background-color: var(--border-soft);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 0.9rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -0.1rem;
+      top: 0.2rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent);
+    }
+
+    .timeline-year {
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 0.05rem;
+    }
+
+    /* About */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .about-card {
+      background-color: var(--bg-white);
+      border-radius: 1rem;
+      padding: 1.1rem 1.3rem;
+      border: 1px solid var(--border-soft);
+      font-size: 0.9rem;
+    }
+
+    .about-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Contact */
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact p {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .contact-links a {
+      padding: 0.15rem 0.3rem;
+    }
+
+    /* Footer */
+
+    footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 1rem 0;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 768px) {
+      .hero-grid,
+      .two-column,
+      .talks-grid,
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+
+      .hero {
+        padding-top: 2.2rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>The Electric Genome</h1>
-  <h2>A Mechanistic Hypothesis for Nuclear Architecture and Gene Expression Bias</h2>
 
-  <p><strong>Ifat Keydar</strong><br>
-  Independent Scientist, Tel Aviv, Israel</p>
+<header>
+  <div class="nav-bar">
+    <div class="nav-brand">IFAT KEYDAR</div>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#electric-genome">The Electric Genome</a>
+      <a href="#publications">Publications</a>
+      <a href="#talks">Talks</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  <hr>
+<main>
 
-  <h3>About</h3>
-  <p>
-    The Electric Genome is a scientific framework proposing that electrostatic forces guide the 3D arrangement of DNA in the cell nucleus. This spatial organization affects which genes turn on or off, offering new insight into genome regulation and disease.
-  </p>
-  <p>
-    This website accompanies my BioEssays hypothesis paper:
-    <em>The Electric Genome: A Mechanistic Hypothesis for Nuclear Architecture and Gene Expression Bias</em>.
-  </p>
-  <p>
-     <a href="https://onlinelibrary.wiley.com/share/author/C8HK67IYCVWKPQB6JXCN?target=10.1002/bies.70076">Read the paper</a>
-  </p>
+  <!-- Hero / Home -->
+  <section id="home" class="hero">
+    <div class="wrapper">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-subtitle">Independent scientist</div>
+          <h1 class="hero-title">The Electric Genome</h1>
+          <p class="hero-text">
+            I work on a mechanistic, falsifiable framework in which chromatin charge and electrostatic forces
+            shape nuclear architecture and gene expression bias.
+          </p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#electric-genome">Explore the hypothesis</a>
+            <a class="btn btn-ghost" href="#publications">View publications</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <h3>Concept sketch</h3>
+          <p>
+            Placeholder for a schematic figure of a spherical nucleus with:
+          </p>
+          <ul>
+            <li>a peripheral electric field at the nuclear envelope,</li>
+            <li>inward migration of less negative, GC rich chromatin,</li>
+            <li>positively charged bodies such as speckles and nucleoli near the center,</li>
+            <li>more negative, AT rich chromatin at the periphery.</li>
+          </ul>
+          <p style="margin-top:0.6rem;">
+            This visual will later be replaced by an actual figure derived from the Electric Genome model.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h3>Graphical Abstract</h3>
-  <img src="Graphical_Abstract.png" alt="Graphical Abstract" width="600">
+  <!-- The Electric Genome -->
+  <section id="electric-genome">
+    <div class="wrapper">
+      <div class="section-label">Research focus</div>
+      <h2>The Electric Genome Hypothesis</h2>
+      <div class="two-column" style="margin-top:1.5rem;">
+        <div>
+          <p>
+            The spatial organization of the nucleus shows remarkable regularity, yet its underlying physical
+            mechanism remains unresolved. The Electric Genome Hypothesis proposes that a steady electric field
+            at the nuclear envelope acts on charged macromolecules, so that the nucleus effectively functions
+            as a spherical electrophoresis apparatus.
+          </p>
+          <p>
+            Although DNA is uniformly negative, the effective charge of chromatin is not. Bound proteins
+            such as histones, transcription factors, and other DNA associated proteins modify local charge.
+            Their binding patterns are influenced by sequence features, for example higher nucleosome density
+            in GC rich regions. This generates an uneven charge landscape that shapes how chromatin and nuclear
+            bodies respond to the nuclear field.
+          </p>
+          <p>
+            In this framework, GC rich, less negative chromatin and positively charged bodies like speckles and
+            nucleoli tend to occupy internal positions, while more negative, AT rich chromatin remains peripheral.
+            Charge dependent positioning provides a physical route to allele specific expression bias and
+            variable disease penetrance, by turning subtle sequence or epigenetic differences between homologs
+            into spatial and functional asymmetry.
+          </p>
 
-  <h3>Contact</h3>
-  <p>Email: <a href="mailto:ifat.keydar.science@gmail.com">ifat.keydar.science@gmail.com</a></p>
+          <div class="tag-list">
+            <span class="tag">nuclear architecture</span>
+            <span class="tag">chromatin charge</span>
+            <span class="tag">allele specific expression</span>
+            <span class="tag">testable mechanism</span>
+          </div>
+
+          <p>
+            A detailed version of this model appears in my
+            <em>BioEssays</em> hypothesis article. The goal is to treat electrostatics not as background
+            noise but as a measurable and predictive principle of nuclear self organization.
+          </p>
+
+          <p>
+            <a href="#" target="_blank" rel="noopener">Read the BioEssays article (link placeholder)</a>
+          </p>
+        </div>
+        <div>
+          <div class="card">
+            <h3>Key ingredients</h3>
+            <ul>
+              <li>Radial electric field maintained at the nuclear envelope.</li>
+              <li>Uneven chromatin charge set by protein binding and sequence context.</li>
+              <li>Reproducible radial positioning as an electrostatic equilibrium.</li>
+              <li>Integration with loop extrusion, phase separation, and nuclear bodies.</li>
+            </ul>
+          </div>
+          <div class="card" style="margin-top:1rem;">
+            <h3>Future work</h3>
+            <p style="margin-bottom:0.5rem;">
+              Ongoing and envisioned directions include:
+            </p>
+            <ul>
+              <li>quantitative mapping of protein based chromatin charge,</li>
+              <li>re analysis of existing genomic and imaging datasets in charge coordinates,</li>
+              <li>charge perturbation experiments to probe causality,</li>
+              <li>collaborations with experimental groups working on nuclear imaging and genome organization.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications">
+    <div class="wrapper">
+      <div class="section-label">Work</div>
+      <h2>Selected publications</h2>
+
+      <div class="pub-item">
+        <div class="pub-title">
+          The Electric Genome: A Mechanistic Hypothesis for Nuclear Architecture and Gene Expression Bias
+        </div>
+        <div class="pub-meta">
+          <em>BioEssays</em>, 2025. Hypothesis article on electrostatic control of nuclear organization.
+        </div>
+        <div class="pub-links">
+          <a href="#" target="_blank" rel="noopener">Journal link (placeholder)</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">
+          Nuclear 3D Location and Splicing Regulation
+        </div>
+        <div class="pub-meta">
+          <em>Molecular Cell</em>, 2022. Experimental study connecting nuclear position and RNA processing.
+        </div>
+        <div class="pub-links">
+          <a href="#" target="_blank" rel="noopener">Journal link (placeholder)</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">
+          Allele Specific Expression in the Brain and Cortex
+        </div>
+        <div class="pub-meta">
+          Conference talks and related work, 2013–2014.
+        </div>
+        <div class="pub-links">
+          <a href="#" target="_blank" rel="noopener">Details or preprint (optional placeholder)</a>
+        </div>
+      </div>
+
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0.5rem;">
+        A complete list of publications can be added here as a PDF or separate page.
+      </p>
+    </div>
+  </section>
+
+  <!-- Talks -->
+  <section id="talks">
+    <div class="wrapper">
+      <div class="section-label">Talks</div>
+      <h2>Talks and events</h2>
+
+      <div class="talks-grid" style="margin-top:1.4rem;">
+        <div>
+          <div class="talk-item">
+            <div class="talk-title">Nuclear 3D Location and Splicing Regulation</div>
+            <div class="talk-meta">
+              EMBO | EMBL Symposium "The 3D Genome: Gene Regulation and Disease", Kyllini, Greece, 2019. Oral presentation.
+            </div>
+          </div>
+
+          <div class="talk-item">
+            <div class="talk-title">Allele Specific Expression in the Dorsolateral Cortex</div>
+            <div class="talk-meta">
+              Psychiatric Genomics Club, Icahn School of Medicine at Mount Sinai, New York, 2014. Talk.
+            </div>
+          </div>
+
+          <div class="talk-item">
+            <div class="talk-title">Allele Specific Expression in the Brain</div>
+            <div class="talk-meta">
+              Psychiatric Genomics Club, Icahn School of Medicine at Mount Sinai, New York, 2013. Talk.
+            </div>
+          </div>
+
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0.7rem;">
+            Future talks on the Electric Genome, including conference abstracts, can be added here.
+          </p>
+        </div>
+        <div>
+          <div class="card">
+            <h3>Timeline</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-year">2013–2014</div>
+                <div>Talks on allele specific expression in the human brain.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2019</div>
+                <div>EMBO | EMBL Symposium talk on nuclear location and splicing.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2022</div>
+                <div><em>Molecular Cell</em> publication on nuclear organization and RNA processing.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2025</div>
+                <div><em>BioEssays</em> publication of the Electric Genome hypothesis.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="wrapper">
+      <div class="section-label">Background</div>
+      <h2>About</h2>
+
+      <div class="about-grid" style="margin-top:1.4rem;">
+        <div>
+          <p>
+            I am an independent scientist based in Tel Aviv, working at the interface of genomics,
+            nuclear organization, and biophysics. My research interests focus on how physical principles,
+            particularly electrostatics, can explain the reproducible yet flexible organization of the genome
+            in three dimensions.
+          </p>
+          <p>
+            My previous work includes studies of allele specific expression in the human brain and a
+            <em>Molecular Cell</em> paper linking nuclear positioning to splicing regulation. These lines
+            of thought eventually converged into the Electric Genome Hypothesis, which proposes that chromatin
+            charge and electrostatic forces provide a unifying mechanism for nuclear architecture and expression bias.
+          </p>
+          <p>
+            I am especially interested in collaborations with experimental groups who work on nuclear imaging,
+            genome organization, and chromatin biophysics, and who may wish to test or refine aspects of this model.
+          </p>
+        </div>
+        <div>
+          <div class="about-card">
+            <h3>Research style</h3>
+            <p>
+              I tend to work from concept to mechanism, starting from simple physical principles and then asking
+              what patterns they can explain in existing data.
+            </p>
+            <ul>
+              <li>Preference for testable and falsifiable models.</li>
+              <li>Integration of physics, genomics, and nuclear imaging.</li>
+              <li>Attention to radial organization, allele asymmetry, and disease penetrance.</li>
+            </ul>
+          </div>
+          <div class="about-card" style="margin-top:1rem;">
+            <h3>Location</h3>
+            <p>
+              Tel Aviv, Israel.  
+              Working independently, with existing and potential collaborations in Europe and North America.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="wrapper contact">
+      <div class="section-label">Contact</div>
+      <h2>Get in touch</h2>
+      <p>
+        I welcome thoughtful scientific correspondence, especially from researchers interested in nuclear organization,
+        chromatin biophysics, or testing aspects of the Electric Genome Hypothesis.
+      </p>
+      <p>
+        <strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a>
+      </p>
+      <div class="contact-links">
+        <a href="#" target="_blank" rel="noopener">ORCID (placeholder)</a>
+        <a href="#" target="_blank" rel="noopener">Google Scholar (placeholder)</a>
+        <a href="#" target="_blank" rel="noopener">GitHub Pages (placeholder)</a>
+        <a href="#" target="_blank" rel="noopener">LinkedIn (optional)</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrapper">
+    © <span id="year"></span> Ifat Keydar. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  // Set current year in footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
